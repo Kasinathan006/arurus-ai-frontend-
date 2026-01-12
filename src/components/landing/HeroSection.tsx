@@ -15,11 +15,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onRequestAccess }) => {
                     transition={{ duration: 0.6, delay: 0.2 }}
                     className="text-6xl md:text-7xl font-bold text-white mb-6 leading-tight"
                 >
-                    Li
-                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600">
-                        ai
-                    </span>
-                    son: Your AI Product Manager
+                    Liaison: Your AI Product Manager
                 </motion.h1>
 
                 {/* Subheadline */}

@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  # REACT FRONTEND
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"
+    environment:
+      # These URLs must be accessible from the User's Browser (Host Machine)
+      - VITE_AUTH_URL=http://localhost:3001
+      - VITE_API_URL=http://localhost:3002
+      - VITE_AI_URL=http://localhost:3003
+      - VITE_REPORTS_URL=http://localhost:3006
+      - VITE_GATEWAY_URL=http://localhost:80
+    depends_on:
+      - gateway
+    networks:
+      - auras-network
+
+  # ----------------------------------------------------------------
+  # MOCK BACKEND SERVICES (Placeholder structure based on description)
+  # ----------------------------------------------------------------
+
+  # GATEWAY (Nginx)
+  gateway:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    networks:
+      - auras-network
+
+  # AUTH SERVICE
+  auth-service:
+    image: node:18-alpine
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+    networks:
+      - auras-network
+
+  # CORE API
+  core-api:
+    image: node:18-alpine
+    ports:
+      - "3002:3002"
+    environment:
+      - PORT=3002
+    networks:
+      - auras-network
+
+  # AI ENGINE
+  ai-engine:
+    image: python:3.9-slim
+    ports:
+      - "3003:3003"
+    environment:
+      - PORT=3003
+    networks:
+      - auras-network
+
+networks:
+  auras-network:
+    driver: bridge
